@@ -31,8 +31,7 @@ jobs:
     - task: PowerShell@2
       displayName: "Generate Calorate API Documentation"
       inputs:
-        filePath: '$(System.DefaultWorkingDirectory)/Calorate.WebApi.exe'
-        arguments: '--GenerateOpenApi true --OpenApiOutputPath swagger.yaml'
+        arguments: '$(System.DefaultWorkingDirectory)/Calorate.WebApi.exe --GenerateOpenApi true --OpenApiOutputPath swagger.yaml'
       env:
         aws__rds__database_name: $(AWS_RDS_DATABASE_NAME)
         aws__rds__username: $(AWS_RDS_READONLY_USERNAME)
