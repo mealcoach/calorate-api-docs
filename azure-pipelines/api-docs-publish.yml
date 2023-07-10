@@ -64,4 +64,4 @@ jobs:
       displayName: "Commit & Push Files"
       inputs:
         filePath: '$(System.DefaultWorkingDirectory)/azure-pipelines/scripts/git-commit-and-push.ps1'
-        arguments: 'main "swagger.yaml" "Updating latest API documentation"'
+        arguments: 'master "swagger.yaml" "Updating latest API documentation"'
