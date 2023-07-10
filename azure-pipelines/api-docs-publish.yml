@@ -36,31 +36,31 @@ jobs:
           # Write your PowerShell commands here.
 
           # remap environment variables
-          $env:aws__rds__database_name = $(AWS_RDS_DATABASE_NAME)
-          $env:aws__rds__username = $(AWS_RDS_READONLY_USERNAME)
-          $env:aws__rds__password = $(AWS_RDS_READONLY_PASSWORD)
-          $env:aws__rds__server = $(AWS_RDS_SERVER)
-          $env:aws__s3__region = $(AWS_S3_REGION)
-          $env:aws__s3__aws_secret_access_key = $(AWS_S3_SECRET_ACCESS_KEY)
-          $env:aws__s3__aws_access_key_id = $(AWS_S3_ACCESS_KEY_ID)
-          $env:aws__s3__bucket_name = $(AWS_S3_BUCKET_NAME)
-          $env:aws__cognito__aws_access_key_id = $(AWS_COGNITO_ACCESS_KEY_ID)
-          $env:aws__cognito__aws_secret_access_key = $(AWS_COGNITO_SECRET_ACCESS_KEY)
-          $env:aws__cognito__region = $(AWS_COGNITO_REGION)
-          $env:aws__cognito__user_pool_client_id = $(AWS_COGNITO_USER_POOL_CLIENT_ID)
-          $env:aws__cognito__user_pool_id = $(AWS_COGNITO_USER_POOL_ID)
-          $env:aws__cloudwatch__region = $(AWS_CLOUDWATCH_REGION)
-          $env:aws__cloudwatch__aws_secret_access_key = $(AWS_CLOUDWATCH_SECRET_ACCESS_KEY)
-          $env:aws__cloudwatch__aws_access_key_id = $(AWS_CLOUDWATCH_ACCESS_KEY_ID)
-          $env:aws__cloudwatch__log_group_name = $(AWS_CLOUDWATCH_TEST_LOG_GROUP_NAME)
-          $env:aws__cloudwatch__default_log_stream_name = $(AWS_CLOUDWATCH_DEFAULT_LOG_STREAM_NAME)
-          $env:mongo__database_name = $(MONGO_DATABASE)
-          $env:mongo__username = $(MONGO_READONLY_USERNAME)
-          $env:mongo__password = $(MONGO_READONLY_PASSWORD)
-          $env:mongo__server = $(MONGO_SERVER)
-          $env:calorate__api__server = $(CALORATE_API_TEST_SERVER)
-          $env:calorate__api__username = $(CALORATE_API_ADMIN_USERNAME)
-          $env:calorate__api__password = $(CALORATE_API_ADMIN_PASSWORD)
+          $env:aws__rds__database_name = "$(AWS_RDS_DATABASE_NAME)"
+          $env:aws__rds__username = "$(AWS_RDS_READONLY_USERNAME)"
+          $env:aws__rds__password = "$(AWS_RDS_READONLY_PASSWORD)"
+          $env:aws__rds__server = "$(AWS_RDS_SERVER)"
+          $env:aws__s3__region = "$(AWS_S3_REGION)"
+          $env:aws__s3__aws_secret_access_key = "$(AWS_S3_SECRET_ACCESS_KEY)"
+          $env:aws__s3__aws_access_key_id = "$(AWS_S3_ACCESS_KEY_ID)"
+          $env:aws__s3__bucket_name = "$(AWS_S3_BUCKET_NAME)"
+          $env:aws__cognito__aws_access_key_id = "$(AWS_COGNITO_ACCESS_KEY_ID)"
+          $env:aws__cognito__aws_secret_access_key = "$(AWS_COGNITO_SECRET_ACCESS_KEY)"
+          $env:aws__cognito__region = "$(AWS_COGNITO_REGION)"
+          $env:aws__cognito__user_pool_client_id = "$(AWS_COGNITO_USER_POOL_CLIENT_ID)"
+          $env:aws__cognito__user_pool_id = "$(AWS_COGNITO_USER_POOL_ID)"
+          $env:aws__cloudwatch__region = "$(AWS_CLOUDWATCH_REGION)"
+          $env:aws__cloudwatch__aws_secret_access_key = "$(AWS_CLOUDWATCH_SECRET_ACCESS_KEY)"
+          $env:aws__cloudwatch__aws_access_key_id = "$(AWS_CLOUDWATCH_ACCESS_KEY_ID)"
+          $env:aws__cloudwatch__log_group_name = "$(AWS_CLOUDWATCH_TEST_LOG_GROUP_NAME)"
+          $env:aws__cloudwatch__default_log_stream_name = "$(AWS_CLOUDWATCH_DEFAULT_LOG_STREAM_NAME)"
+          $env:mongo__database_name = "$(MONGO_DATABASE)"
+          $env:mongo__username = "$(MONGO_READONLY_USERNAME)"
+          $env:mongo__password = "$(MONGO_READONLY_PASSWORD)"
+          $env:mongo__server = "$(MONGO_SERVER)"
+          $env:calorate__api__server = "$(CALORATE_API_TEST_SERVER)"
+          $env:calorate__api__username = "$(CALORATE_API_ADMIN_USERNAME)"
+          $env:calorate__api__password = "$(CALORATE_API_ADMIN_PASSWORD)"
 
           $(System.DefaultWorkingDirectory)/Calorate.WebApi.exe --GenerateOpenApi true --OpenApiOutputPath swagger.yaml
 
