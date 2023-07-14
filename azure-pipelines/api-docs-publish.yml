@@ -16,18 +16,19 @@ jobs:
     steps:
     - checkout: self
       persistCredentials: true
-      
-    - task: UniversalPackages@0
-      displayName: Download Calorate Web API
+
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download Nightly Build Artifacts'
       inputs:
-        command: 'download'
-        downloadDirectory: '$(System.DefaultWorkingDirectory)'
-        feedsToUse: 'internal'
-        vstsFeed: 'Calorate/calorate-web-api'
-        vstsFeedPackage: 'calorate-web-api-nightly'
-        vstsPackageVersion: '*'
-        verbosity: 'Debug'
-        
+        buildType: 'specific'
+        project: '88a67196-ecef-4c37-9ef0-0c49e780b152'
+        pipeline: '2'
+        specificBuildWithTriggering: true
+        buildVersionToDownload: 'latest'
+        downloadType: 'single'
+        artifactName: 'calorate-web-api-nightly'
+        downloadPath: '$(System.DefaultWorkingDirectory)'
+
     - task: PowerShell@2
       displayName: "Generate Calorate API Documentation"
       inputs:
