@@ -63,7 +63,7 @@ jobs:
           $env:calorate__api__username = "$(CALORATE_API_ADMIN_USERNAME)"
           $env:calorate__api__password = "$(CALORATE_API_ADMIN_PASSWORD)"
 
-          & "$(System.DefaultWorkingDirectory)/Calorate.WebApi.exe" --GenerateOpenApi true --OpenApiOutputPath swagger.yaml
+          & "$(System.DefaultWorkingDirectory)/calorate-web-api-nightly/Calorate.WebApi.exe" --GenerateOpenApi true --OpenApiOutputPath swagger.yaml
 
     - task: PowerShell@2
       displayName: "Commit & Push Files"
