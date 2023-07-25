@@ -1,5 +1,4 @@
----
-openapi: 3.0.1
+﻿openapi: 3.0.1
 info:
   title: Calorate API
   description: "Allows web-based access to the Calorate\r\nservices that power mealcoach.io."
@@ -10,10 +9,38 @@ info:
     email: admin@mealcoach.io
   version: v1
 paths:
-  "/auth/register":
+  /Administration/accounts/create/api:
     post:
       tags:
-      - Authentication
+        - Administration
+      summary: Create API Account
+      description: Creates an API account with the specified parameters.
+      requestBody:
+        description: The data provided to fulfill the request.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Calorate.Administration.Web.Models.CreateApiAccountRequest'
+        required: true
+      responses:
+        '200':
+          description: When the request is successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Administration.Web.Models.CreateApiAccountResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /auth/register:
+    post:
+      tags:
+        - Authentication
       summary: Register
       description: Attempts to register a new user.
       requestBody:
@@ -21,7 +48,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.RegisterRequest"
+              $ref: '#/components/schemas/Calorate.Authentication.Web.Models.RegisterRequest'
         required: true
       responses:
         '200':
@@ -29,17 +56,17 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.RegisterResponse"
+                $ref: '#/components/schemas/Calorate.Authentication.Web.Models.RegisterResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/auth/confirm":
+  /auth/confirm:
     post:
       tags:
-      - Authentication
+        - Authentication
       summary: Confirm Registration
       description: Attempts to confirm the registeration of a new user.
       requestBody:
@@ -47,7 +74,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.ConfirmRegistrationRequest"
+              $ref: '#/components/schemas/Calorate.Authentication.Web.Models.ConfirmRegistrationRequest'
         required: true
       responses:
         '200':
@@ -55,17 +82,17 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.ConfirmRegistrationResponse"
+                $ref: '#/components/schemas/Calorate.Authentication.Web.Models.ConfirmRegistrationResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/auth/changePassword":
+  /auth/changePassword:
     post:
       tags:
-      - Authentication
+        - Authentication
       summary: Change Password
       description: Attempts to change the user's password.
       requestBody:
@@ -73,7 +100,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.ChangePasswordRequest"
+              $ref: '#/components/schemas/Calorate.Authentication.Web.Models.ChangePasswordRequest'
         required: true
       responses:
         '200':
@@ -82,20 +109,18 @@ paths:
           description: When the parameters for the request are invalid.
         '415':
           description: When the request is not the right media type.
-  "/auth/resetPassword":
+  /auth/resetPassword:
     post:
       tags:
-      - Authentication
+        - Authentication
       summary: Reset Password
-      description: "Attempts to reset the user's password. The password will not be
-        \r\nreturned on this API call so users will be required to check \r\ntheir
-        other enabled communication for their new password."
+      description: "Attempts to reset the user's password. The password will not be \r\nreturned on this API call so users will be required to check \r\ntheir other enabled communication for their new password."
       requestBody:
         description: The data provided to fulfill the request.
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.ResetPasswordRequest"
+              $ref: '#/components/schemas/Calorate.Authentication.Web.Models.ResetPasswordRequest'
         required: true
       responses:
         '200':
@@ -104,10 +129,10 @@ paths:
           description: When the parameters for the request are invalid.
         '415':
           description: When the request is not the right media type.
-  "/auth/login":
+  /auth/login:
     post:
       tags:
-      - Authentication
+        - Authentication
       summary: Login
       description: Attempts to log in the user given the required parameters.
       requestBody:
@@ -115,7 +140,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.LoginRequest"
+              $ref: '#/components/schemas/Calorate.Authentication.Web.Models.LoginRequest'
         required: true
       responses:
         '200':
@@ -123,17 +148,17 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.LoginResponse"
+                $ref: '#/components/schemas/Calorate.Authentication.Web.Models.LoginResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/auth/logout":
+  /auth/logout:
     get:
       tags:
-      - Authentication
+        - Authentication
       summary: Logout
       description: Attempts to log the user out.
       responses:
@@ -143,10 +168,10 @@ paths:
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
-  "/auth/refresh":
+  /auth/refresh:
     post:
       tags:
-      - Authentication
+        - Authentication
       summary: Refresh
       description: Attempts to refresh authorization for the user.
       requestBody:
@@ -154,7 +179,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.RefreshRequest"
+              $ref: '#/components/schemas/Calorate.Authentication.Web.Models.RefreshRequest'
         required: true
       responses:
         '200':
@@ -162,17 +187,17 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.LoginResponse"
+                $ref: '#/components/schemas/Calorate.Authentication.Web.Models.LoginResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/brands/create":
+  /Brands/create:
     post:
       tags:
-      - Brands
+        - Brands
       summary: Create Brand
       description: Creates a brand with the provided parameters.
       requestBody:
@@ -180,7 +205,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Brands.Web.Models.CreateBrandRequest"
+              $ref: '#/components/schemas/Calorate.Brands.Web.Models.CreateBrandRequest'
         required: true
       responses:
         '200':
@@ -188,7 +213,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse"
+                $ref: '#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -197,205 +222,191 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/brands/get/{id}":
+  '/Brands/get/{id}':
     get:
       tags:
-      - Brands
+        - Brands
       summary: Get Brand
       description: Retrieves the brand with the specified ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the brand to retrieve details for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the brand to retrieve details for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse"
+                $ref: '#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/brands/ownedby/{userId}":
+  '/Brands/ownedby/{userId}':
     get:
       tags:
-      - Brands
+        - Brands
       summary: Get Brands Owned By User
       description: Retrieves the brands that are owned by the user.
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse"
+                $ref: '#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/brands/ownedby":
+  /Brands/ownedby:
     get:
       tags:
-      - Brands
+        - Brands
       summary: Get Brands Owned By User
       description: Retrieves the brands that are owned by the user.
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse"
+                $ref: '#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/brands/visibleto/{userId}":
+  '/Brands/visibleto/{userId}':
     get:
       tags:
-      - Brands
+        - Brands
       summary: Get Brands Visible To User
-      description: "Retrieves the brands that are visible to (not necessarily owned
-        by \r\nthe) user."
+      description: "Retrieves the brands that are visible to (not necessarily owned by \r\nthe) user."
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse"
+                $ref: '#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/brands/visibleto":
+  /Brands/visibleto:
     get:
       tags:
-      - Brands
+        - Brands
       summary: Get Brands Visible To User
-      description: "Retrieves the brands that are visible to (not necessarily owned
-        by \r\nthe) user."
+      description: "Retrieves the brands that are visible to (not necessarily owned by \r\nthe) user."
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse"
+                $ref: '#/components/schemas/Calorate.Brands.Web.Models.GetBrandsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/calculations/bmr":
+  /calculations/bmr:
     post:
       tags:
-      - Calculations
+        - Calculations
       summary: Calculate BMR
       description: Calculates the BMR given the provided parameters.
       requestBody:
@@ -403,7 +414,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.GetBmrRequest"
+              $ref: '#/components/schemas/Calorate.Calculations.Web.Models.GetBmrRequest'
         required: true
       responses:
         '200':
@@ -411,19 +422,19 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.GetBmrResponse"
+                $ref: '#/components/schemas/Calorate.Calculations.Web.Models.GetBmrResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
-        '403':
-          description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/calculations/tdee":
+        '403':
+          description: When the request is not authorized.
+  /calculations/tdee:
     post:
       tags:
-      - Calculations
+        - Calculations
       summary: Calculate TDEE
       description: Calculates the TDEE given the provided parameters.
       requestBody:
@@ -431,7 +442,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.GetTdeeRequest"
+              $ref: '#/components/schemas/Calorate.Calculations.Web.Models.GetTdeeRequest'
         required: true
       responses:
         '200':
@@ -439,19 +450,154 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.GetTdeeResponse"
+                $ref: '#/components/schemas/Calorate.Calculations.Web.Models.GetTdeeResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
-        '403':
-          description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/checkins/get/workflow":
+        '403':
+          description: When the request is not authorized.
+  '/Checkins/get/{id}':
     get:
       tags:
-      - Checkins
+        - Checkins
+      summary: Get Checkin
+      description: Creates a checkin given the provided data.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the checkin to retrieve.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '403':
+          description: When the user is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /Checkins/get/list:
+    get:
+      tags:
+        - Checkins
+      summary: Get Checkins
+      description: Gets the list of checkins based on the provided parameters.
+      parameters:
+        - name: offset
+          in: query
+          description: "Optional. The offset into the paged data. If set, must be greater \r\nthan 0. Defaults to 0."
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: limit
+          in: query
+          description: "Optional. The limit of the number of checkins to retrieve. If set, must \r\nbe greater than 0 and less than or equal to 1000. Defaults to 1000."
+          schema:
+            type: integer
+            format: int32
+            default: 1000
+        - name: sortDateAscending
+          in: query
+          description: "Optional. Specifies whether or not to sort the checkins by date in \r\nascending order. Defaults to true."
+          schema:
+            type: boolean
+            default: true
+        - name: minimumDateTime
+          in: query
+          description: "Optional. The minimum date to consider when checking for recent \r\ncheckins. Defaults to the dawn of time."
+          schema:
+            type: integer
+            format: int64
+        - name: maximumDateTime
+          in: query
+          description: "Optional. The maximum date to consider when checking for recent \r\ncheckins. Defaults to the end of time."
+          schema:
+            type: integer
+            format: int64
+        - name: segmentFilter
+          in: query
+          description: Optional. The filter to apply to the segments of the checkins.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: When the request has completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinsResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '403':
+          description: When the user is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /Checkins/get/recent:
+    get:
+      tags:
+        - Checkins
+      summary: Get Recent Checkins
+      description: Gets the list of recent checkins based on the provided parameters.
+      parameters:
+        - name: sortDateAscending
+          in: query
+          description: "Optional. Specifies whether or not to sort the checkins by date in \r\nascending order. Defaults to true."
+          schema:
+            type: boolean
+            default: true
+        - name: offset
+          in: query
+          description: "Optional. The offset into the paged data. If set, must be greater \r\nthan 0. Defaults to 0."
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: limit
+          in: query
+          description: "Optional. The limit of the number of checkins to retrieve. If set, must \r\nbe greater than 0 and less than or equal to 1000. Defaults to 1000."
+          schema:
+            type: integer
+            format: int32
+            default: 1000
+        - name: minimumDateTime
+          in: query
+          description: "Optional. The minimum date to consider when checking for recent \r\ncheckins. Defaults to the dawn of time."
+          schema:
+            type: integer
+            format: int64
+        - name: segmentFilter
+          in: query
+          description: Optional. The filter to apply to the segments of the checkins.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: When the request has completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinsResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '403':
+          description: When the user is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /Checkins/workflow:
+    get:
+      tags:
+        - Checkins
       summary: Get Checkin Workflow
       description: Gets the workflow information for checking in.
       responses:
@@ -461,10 +607,10 @@ paths:
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
-  "/checkins/create":
+  /Checkins/create:
     post:
       tags:
-      - Checkins
+        - Checkins
       summary: Create Checkin
       description: Creates a checkin given the provided data.
       requestBody:
@@ -472,7 +618,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.CreateCheckinRequest"
+              $ref: '#/components/schemas/Calorate.Checkins.Web.Models.CreateCheckinRequest'
         required: true
       responses:
         '200':
@@ -480,201 +626,182 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.CreateCheckinResponse"
+                $ref: '#/components/schemas/Calorate.Checkins.Web.Models.CreateCheckinResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/checkins/get/{id}":
+  '/Checkins/{id}':
     get:
       tags:
-      - Checkins
+        - Checkins
       summary: Get Checkin
       description: Creates a checkin given the provided data.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the checkin to retrieve.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the checkin to retrieve.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinResponse"
+                $ref: '#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/checkins/get/list":
+  /Checkins/list:
     get:
       tags:
-      - Checkins
+        - Checkins
       summary: Get Checkins
       description: Gets the list of checkins based on the provided parameters.
       parameters:
-      - name: limit
-        in: query
-        description: "The limit of the number of checkins to retrieve. Must be greater
-          \r\nthan 0 and less than or equal to 1000."
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: sortDateAscending
-        in: query
-        description: Specifies whether or not to sort the checkins by date in ascending
-          order.
-        required: true
-        schema:
-          type: boolean
-      - name: minimumDateTime
-        in: query
-        description: Optional. The minimum date to consider when checking for recent
-          checkins.
-        schema:
-          type: integer
-          format: int64
-      - name: maximumDateTime
-        in: query
-        description: Optional. The maximum date to consider when checking for recent
-          checkins.
-        schema:
-          type: integer
-          format: int64
-      - name: segmentFilter
-        in: query
-        description: Optional. The filter to apply to the segments of the checkins.
-        schema:
-          type: string
-      - name: hasMetric
-        in: query
-        description: Optional. Whether or not the checkin must have a metric specified.
-        schema:
-          type: boolean
-          default: false
-      - name: hasGoal
-        in: query
-        description: Optional. Whether or not the checkin must have a goal specified.
-        schema:
-          type: boolean
-          default: false
+        - name: offset
+          in: query
+          description: "Optional. The offset into the paged data. If set, must be greater \r\nthan 0. Defaults to 0."
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: limit
+          in: query
+          description: "Optional. The limit of the number of checkins to retrieve. If set, must \r\nbe greater than 0 and less than or equal to 1000. Defaults to 1000."
+          schema:
+            type: integer
+            format: int32
+            default: 1000
+        - name: sortDateAscending
+          in: query
+          description: "Optional. Specifies whether or not to sort the checkins by date in \r\nascending order. Defaults to true."
+          schema:
+            type: boolean
+            default: true
+        - name: minimumDateTime
+          in: query
+          description: "Optional. The minimum date to consider when checking for recent \r\ncheckins. Defaults to the dawn of time."
+          schema:
+            type: integer
+            format: int64
+        - name: maximumDateTime
+          in: query
+          description: "Optional. The maximum date to consider when checking for recent \r\ncheckins. Defaults to the end of time."
+          schema:
+            type: integer
+            format: int64
+        - name: segmentFilter
+          in: query
+          description: Optional. The filter to apply to the segments of the checkins.
+          schema:
+            type: string
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinsResponse"
+                $ref: '#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/checkins/get/recent":
+  /Checkins/recent:
     get:
       tags:
-      - Checkins
+        - Checkins
       summary: Get Recent Checkins
       description: Gets the list of recent checkins based on the provided parameters.
       parameters:
-      - name: limit
-        in: query
-        description: "The limit of the number of checkins to retrieve. Must be greater
-          \r\nthan 0 and less than or equal to 1000."
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: sortDateAscending
-        in: query
-        description: Specifies whether or not to sort the checkins by date in ascending
-          order.
-        required: true
-        schema:
-          type: boolean
-      - name: minimumDateTime
-        in: query
-        description: Optional. The minimum date to consider when checking for recent
-          checkins.
-        schema:
-          type: integer
-          format: int64
-      - name: segmentFilter
-        in: query
-        description: Optional. The filter to apply to the segments of the checkins.
-        schema:
-          type: string
-      - name: hasMetric
-        in: query
-        description: Optional. Whether or not the checkin must have a metric specified.
-        schema:
-          type: boolean
-          default: false
-      - name: hasGoal
-        in: query
-        description: Optional. Whether or not the checkin must have a goal specified.
-        schema:
-          type: boolean
-          default: false
+        - name: sortDateAscending
+          in: query
+          description: "Optional. Specifies whether or not to sort the checkins by date in \r\nascending order. Defaults to true."
+          schema:
+            type: boolean
+            default: true
+        - name: offset
+          in: query
+          description: "Optional. The offset into the paged data. If set, must be greater \r\nthan 0. Defaults to 0."
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: limit
+          in: query
+          description: "Optional. The limit of the number of checkins to retrieve. If set, must \r\nbe greater than 0 and less than or equal to 1000. Defaults to 1000."
+          schema:
+            type: integer
+            format: int32
+            default: 1000
+        - name: minimumDateTime
+          in: query
+          description: "Optional. The minimum date to consider when checking for recent \r\ncheckins. Defaults to the dawn of time."
+          schema:
+            type: integer
+            format: int64
+        - name: segmentFilter
+          in: query
+          description: Optional. The filter to apply to the segments of the checkins.
+          schema:
+            type: string
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinsResponse"
+                $ref: '#/components/schemas/Calorate.Checkins.Web.Models.GetCheckinsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '403':
           description: When the user is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/fitbit/authorization/url":
+  /fitbit/authorization/url:
     get:
       tags:
-      - Fitbit
+        - Fitbit
       summary: Get Authorization URL
-      description: Gets the authorization URL for the user to authorize the application
-        to access their Fitbit data.
+      description: Gets the authorization URL for the user to authorize the application to access their Fitbit data.
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Fitbit.Web.Models.GetAuthorizationUrlResponse"
+                $ref: '#/components/schemas/Calorate.Fitbit.Web.Models.GetAuthorizationUrlResponse'
         '401':
           description: When the request is not authenticated.
-  "/fitbit/authorization/token":
+  /fitbit/authorization/token:
     get:
       tags:
-      - Fitbit
+        - Fitbit
       summary: Get Token
-      description: Gets the token for being able to work with Fitbit data on behalf
-        of the user.
+      description: Gets the token for being able to work with Fitbit data on behalf of the user.
       parameters:
-      - name: code
-        in: query
-        description: The code that was returned from the authorization URL.
-        required: true
-        schema:
-          type: string
-      - name: verifier
-        in: query
-        description: The verifier that was returned from the authorization URL.
-        required: true
-        schema:
-          type: string
+        - name: code
+          in: query
+          description: The code that was returned from the authorization URL.
+          required: true
+          schema:
+            type: string
+        - name: verifier
+          in: query
+          description: The verifier that was returned from the authorization URL.
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: When the request has completed successfully.
@@ -682,10 +809,10 @@ paths:
           description: When the request is not authenticated.
         '403':
           description: When the user is not authorized.
-  "/fitbit/sleep/sync":
+  /fitbit/sleep/sync:
     get:
       tags:
-      - Fitbit
+        - Fitbit
       summary: Sync Sleep
       description: Starts syncing the Fitbit sleep data for the user.
       responses:
@@ -695,10 +822,10 @@ paths:
           description: When the request is not authenticated.
         '403':
           description: When the user is not authorized.
-  "/foods/create":
+  /foods/create:
     post:
       tags:
-      - Foods
+        - Foods
       summary: Create Food
       description: Submits a job for creating a new food to be available on the platform.
       requestBody:
@@ -706,7 +833,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Food.Web.Models.CreateFoodRequest"
+              $ref: '#/components/schemas/Calorate.Food.Web.Models.CreateFoodRequest'
         required: true
       responses:
         '200':
@@ -714,7 +841,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.CreateFoodResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.CreateFoodResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -723,232 +850,218 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/foods/get/{id}":
+  '/foods/get/{id}':
     get:
       tags:
-      - Foods
+        - Foods
       summary: Get Food Details
       description: Retrieves the details for the provided food ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the food to retrieve details for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the food to retrieve details for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.GetFoodDetailsResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.GetFoodDetailsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/foods/get/{id}/units":
+  '/foods/get/{id}/units':
     get:
       tags:
-      - Foods
+        - Foods
       summary: Get Food Units
       description: Retrieves the units for the provided food ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the food to retrieve units for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the food to retrieve units for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.GetFoodUnitsResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.GetFoodUnitsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/foods/ownedby/{userId}":
+  '/foods/ownedby/{userId}':
     get:
       tags:
-      - Foods
+        - Foods
       summary: Get Foods Owned By User
       description: Retrieves the foods that are owned by the user.
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/foods/ownedby":
+  /foods/ownedby:
     get:
       tags:
-      - Foods
+        - Foods
       summary: Get Foods Owned By User
       description: Retrieves the foods that are owned by the user.
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/foods/visibleto/{userId}":
+  '/foods/visibleto/{userId}':
     get:
       tags:
-      - Foods
+        - Foods
       summary: Get Foods Visible To User
-      description: "Retrieves the foods that are visible to (not necessarily owned
-        by \r\nthe) user."
+      description: "Retrieves the foods that are visible to (not necessarily owned by \r\nthe) user."
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/foods/visibleto":
+  /foods/visibleto:
     get:
       tags:
-      - Foods
+        - Foods
       summary: Get Foods Visible To User
-      description: "Retrieves the foods that are visible to (not necessarily owned
-        by \r\nthe) user."
+      description: "Retrieves the foods that are visible to (not necessarily owned by \r\nthe) user."
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.GetFoodsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/foods/search":
+  /foods/search:
     post:
       tags:
-      - Foods
+        - Foods
       summary: Keyword Search
       description: Performs a keyword search given the specified terms.
       requestBody:
@@ -956,7 +1069,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Food.Web.Models.KeywordSearchRequest"
+              $ref: '#/components/schemas/Calorate.Food.Web.Models.KeywordSearchRequest'
         required: true
       responses:
         '200':
@@ -964,7 +1077,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.KeywordSearchResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.KeywordSearchResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -973,19 +1086,18 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/foods/units/beautify":
+  /foods/units/beautify:
     post:
       tags:
-      - Foods
+        - Foods
       summary: Beautify Units
-      description: "Attempts to translate units into a format that is more friendly
-        \r\nto be consumed by an end user instead of programmatically."
+      description: "Attempts to translate units into a format that is more friendly \r\nto be consumed by an end user instead of programmatically."
       requestBody:
         description: The data provided to fulfill the request.
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Food.Web.Models.BeautifyUnitsRequest"
+              $ref: '#/components/schemas/Calorate.Food.Web.Models.BeautifyUnitsRequest'
         required: true
       responses:
         '200':
@@ -993,24 +1105,33 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Food.Web.Models.BeautifyUnitsResponse"
+                $ref: '#/components/schemas/Calorate.Food.Web.Models.BeautifyUnitsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '415':
           description: When the request is not the right media type.
-  "/jobs/start":
+  /Hello:
+    get:
+      tags:
+        - Hello
+      summary: Hello
+      description: Responds with a 200 to let you know the service is alive.
+      responses:
+        '200':
+          description: When the request is successful.
+  /jobs/start:
     post:
       tags:
-      - Jobs
+        - Jobs
       summary: Start Job
       description: Tells the service to mark a new job for tracking.
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Jobs.Web.Models.StartJobRequest"
+              $ref: '#/components/schemas/Calorate.Jobs.Web.Models.StartJobRequest'
         required: true
       responses:
         '200':
@@ -1018,7 +1139,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Jobs.Web.Models.JobSubmittedResponse"
+                $ref: '#/components/schemas/Calorate.Jobs.Web.Models.JobSubmittedResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -1027,10 +1148,10 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/jobs/list/running":
+  /jobs/list/running:
     get:
       tags:
-      - Jobs
+        - Jobs
       summary: Get Running Jobs
       description: Allows privileged users to get the list of running jobs.
       responses:
@@ -1046,35 +1167,35 @@ paths:
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/jobs/get/{id}":
+  '/jobs/get/{id}':
     get:
       tags:
-      - Jobs
+        - Jobs
       summary: Get Job
       description: Gets the job information for the specified ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the job.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the job.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Jobs.Web.Models.GetJobResponse"
+                $ref: '#/components/schemas/Calorate.Jobs.Web.Models.GetJobResponse'
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/generate/create":
+  /generate/create:
     post:
       tags:
-      - Mealplan Generation
+        - Mealplan Generation
       summary: Generate Mealplan
       description: Submits a job for generating a new mealplan.
       requestBody:
@@ -1082,7 +1203,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanRequest"
+              $ref: '#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanRequest'
         required: true
       responses:
         '200':
@@ -1090,7 +1211,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanResponse"
+                $ref: '#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -1099,10 +1220,10 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/generate/mealplan":
+  /generate/mealplan:
     post:
       tags:
-      - Mealplan Generation
+        - Mealplan Generation
       summary: Generate Mealplan
       description: Submits a job for generating a new mealplan.
       requestBody:
@@ -1110,7 +1231,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanRequest"
+              $ref: '#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanRequest'
         required: true
       responses:
         '200':
@@ -1118,7 +1239,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanResponse"
+                $ref: '#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -1127,10 +1248,10 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/generate/mealplan/check":
+  /generate/mealplan/check:
     post:
       tags:
-      - Mealplan Generation
+        - Mealplan Generation
       summary: Can Generate Mealplan
       description: Determines if a mealplan can be generated from the provided parameters.
       requestBody:
@@ -1138,7 +1259,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanRequest"
+              $ref: '#/components/schemas/Calorate.Generation.Web.Models.GenerateMealplanRequest'
         required: true
       responses:
         '200':
@@ -1151,156 +1272,156 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/generate/get/mealplan/parameters/{mealplanId}":
+  '/generate/get/mealplan/parameters/{mealplanId}':
     get:
       tags:
-      - Mealplan Generation
+        - Mealplan Generation
       summary: Get Raw Mealplan Generation Parameters
       description: Gets the parameters that were used to generate the mealplan.
       parameters:
-      - name: mealplanId
-        in: path
-        description: The ID of the mealplan.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: mealplanId
+          in: path
+          description: The ID of the mealplan.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
-        '400':
-          description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/mealplans/get/list":
+        '400':
+          description: When the parameters for the request are invalid.
+  /Mealplans/get/list:
     get:
       tags:
-      - Mealplans
+        - Mealplans
       summary: Get Mealplans Visible To User
       description: Gets the mealplans visible to the user.
       responses:
         '200':
           description: When the request has completed successfully.
-        '400':
-          description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/mealplans/get/{id}":
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/get/{id}':
     get:
       tags:
-      - Mealplans
+        - Mealplans
       summary: Get Mealplan
       description: Gets the mealplan for the specified id.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the mealplan to get.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the mealplan to get.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
-        '400':
-          description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/mealplans/get/{id}/json":
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/get/{id}/json':
     get:
       tags:
-      - Mealplans
+        - Mealplans
       summary: Get Mealplan
       description: Gets the mealplan for the specified id.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the mealplan to get.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the mealplan to get.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
-        '400':
-          description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/mealplans/get/{id}/ingredients/json":
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/get/{id}/ingredients/json':
     get:
       tags:
-      - Mealplans
+        - Mealplans
       summary: Get Mealplan Ingredients
       description: Gets the mealplan ingredients for the specified mealplan id.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the mealplan to get ingredients for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the mealplan to get ingredients for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
-        '400':
-          description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/mealplans/get/{id}/rollup/json":
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/get/{id}/rollup/json':
     get:
       tags:
-      - Mealplans
+        - Mealplans
       summary: Get Mealplan Rollup
       description: Gets the mealplan rollup for the specified mealplan id.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the mealplan to get the rollup for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the mealplan to get the rollup for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
-        '400':
-          description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/mealplans/review/{id}":
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/review/{id}':
     post:
       tags:
-      - Mealplans
+        - Mealplans
       summary: Review Mealplan
       description: Reviews the specified mealplan.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the mealplan to review.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the mealplan to review.
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         description: The data provided to fulfill the request.
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Mealplans.Web.Models.ReviewMealplanRequest"
+              $ref: '#/components/schemas/Calorate.Mealplans.Web.Models.ReviewMealplanRequest'
         required: true
       responses:
         '200':
@@ -1313,10 +1434,395 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/nutrients/get/list":
+  '/Mealplans/track/{mealplanId}/{dayIndex}/{mealIndex}':
+    post:
+      tags:
+        - Mealplans
+      summary: Track Meal
+      description: "Marks the specified meal as having been eaten or not as indicated \r\nby value"
+      parameters:
+        - name: mealplanId
+          in: path
+          description: The ID of the mealplan to get the rollup for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: dayIndex
+          in: path
+          description: The index of the day in the meal plan.
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: mealIndex
+          in: path
+          description: The index of the meal within the day of the meal plan.
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: value
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/track/{mealplanId}/{dayIndex}/water':
+    post:
+      tags:
+        - Mealplans
+      summary: Track Meal
+      description: "Marks the specified meal as having been eaten or not as indicated \r\nby value"
+      parameters:
+        - name: mealplanId
+          in: path
+          description: The ID of the mealplan to get the rollup for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: dayIndex
+          in: path
+          description: The index of the day in the meal plan.
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: unitIdOrSymbol
+          in: query
+          description: The unit ID or symbol of the unit of water consumed.
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          description: The amount of water consumed.
+          required: true
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  /Mealplans/list:
     get:
       tags:
-      - Nutrients
+        - Mealplans
+      summary: Get Mealplans Visible To User
+      description: Gets the mealplans visible to the user.
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{id}':
+    get:
+      tags:
+        - Mealplans
+      summary: Get Mealplan
+      description: Gets the mealplan for the specified id.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the mealplan to get.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{id}/json':
+    get:
+      tags:
+        - Mealplans
+      summary: Get Mealplan
+      description: Gets the mealplan for the specified id.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the mealplan to get.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{id}/ingredients':
+    get:
+      tags:
+        - Mealplans
+      summary: Get Mealplan Ingredients
+      description: Gets the mealplan ingredients for the specified mealplan id.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the mealplan to get ingredients for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{id}/ingredients/json':
+    get:
+      tags:
+        - Mealplans
+      summary: Get Mealplan Ingredients
+      description: Gets the mealplan ingredients for the specified mealplan id.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the mealplan to get ingredients for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{id}/rollup':
+    get:
+      tags:
+        - Mealplans
+      summary: Get Mealplan Rollup
+      description: Gets the mealplan rollup for the specified mealplan id.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the mealplan to get the rollup for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{id}/rollup/json':
+    get:
+      tags:
+        - Mealplans
+      summary: Get Mealplan Rollup
+      description: Gets the mealplan rollup for the specified mealplan id.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the mealplan to get the rollup for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{id}/review':
+    post:
+      tags:
+        - Mealplans
+      summary: Review Mealplan
+      description: Reviews the specified mealplan.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the mealplan to review.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: The data provided to fulfill the request.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Calorate.Mealplans.Web.Models.ReviewMealplanRequest'
+        required: true
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  '/Mealplans/{mealplanId}/track/{dayIndex}/{mealIndex}':
+    post:
+      tags:
+        - Mealplans
+      summary: Track Meal
+      description: "Marks the specified meal as having been eaten or not as indicated \r\nby value"
+      parameters:
+        - name: mealplanId
+          in: path
+          description: The ID of the mealplan to get the rollup for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: dayIndex
+          in: path
+          description: The index of the day in the meal plan.
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: mealIndex
+          in: path
+          description: The index of the meal within the day of the meal plan.
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: value
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  '/Mealplans/{mealplanId}/track/{dayIndex}/water':
+    post:
+      tags:
+        - Mealplans
+      summary: Track Meal
+      description: "Marks the specified meal as having been eaten or not as indicated \r\nby value"
+      parameters:
+        - name: mealplanId
+          in: path
+          description: The ID of the mealplan to get the rollup for.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: dayIndex
+          in: path
+          description: The index of the day in the meal plan.
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: unitIdOrSymbol
+          in: query
+          description: The unit ID or symbol of the unit of water consumed.
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          description: The amount of water consumed.
+          required: true
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '400':
+          description: When the parameters for the request are invalid.
+  /Media/ProgressPhotos/CreateUploadUrl:
+    post:
+      tags:
+        - Media
+      summary: Get Progress Photo Upload Url
+      description: Gets a URL that can be used to upload a progress photo.
+      requestBody:
+        description: "An instance of a Calorate.Media.Web.Models.CreateUploadUrlRequest that contains \r\nthe parameters for the request."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Calorate.Media.Web.Models.CreateUploadUrlRequest'
+        required: true
+      responses:
+        '200':
+          description: When the request has completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Media.Web.Models.CreateUploadUrlResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /nutrients/get/list:
+    get:
+      tags:
+        - Nutrients
       summary: Get Nutrients
       description: Retrieves the list of nutrients.
       responses:
@@ -1325,22 +1831,48 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Nutrients.Web.Models.GetNutrientsResponse"
+                $ref: '#/components/schemas/Calorate.Nutrients.Web.Models.GetNutrientsResponse'
         '401':
           description: When the request is not authenticated.
-  "/recipes/create":
+  '/Recipes/get/{id}':
+    get:
+      tags:
+        - Recipes
+      summary: Get Recipe
+      description: Retrieves the recipe for the specified ID.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the recipe to retrieve.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: When the request has completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.GetRecipeDetailsResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+  /Recipes/create:
     post:
       tags:
-      - Recipes
+        - Recipes
       summary: Create Recipe
-      description: Submits a job for creating a new recipe to be available on the
-        platform.
+      description: Submits a job for creating a new recipe to be available on the platform.
       requestBody:
         description: The data provided to fulfill the request.
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.CreateRecipeRequest"
+              $ref: '#/components/schemas/Calorate.Recipes.Web.Models.CreateRecipeRequest'
         required: true
       responses:
         '200':
@@ -1348,7 +1880,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.CreateRecipeResponse"
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.CreateRecipeResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -1357,10 +1889,41 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/recipes/preview":
+  /Recipes/favorite:
     post:
       tags:
-      - Recipes
+        - Recipes
+      summary: Toggle Favorite
+      description: Toggles the favorite status of a recipe for the authenticated user.
+      parameters:
+        - name: recipeId
+          in: query
+          description: The ID of the recipe to toggle the favorite status of.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: value
+          in: query
+          description: "`true` to toggle the recipe as a favorite, `false` to \r\n            toggle it as not a favorite."
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: When the request has completed successfully.
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /Recipes/preview:
+    post:
+      tags:
+        - Recipes
       summary: Preview Recipe
       description: Previews the recipe given the provided details.
       requestBody:
@@ -1368,7 +1931,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.PreviewRecipeRequest"
+              $ref: '#/components/schemas/Calorate.Recipes.Web.Models.PreviewRecipeRequest'
         required: true
       responses:
         '200':
@@ -1376,7 +1939,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.PreviewRecipeResponse"
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.PreviewRecipeResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -1385,203 +1948,279 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/recipes/get/{id}":
+  '/Recipes/{id}':
     get:
       tags:
-      - Recipes
+        - Recipes
       summary: Get Recipe
       description: Retrieves the recipe for the specified ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the recipe to retrieve.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the recipe to retrieve.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.GetRecipeDetailsResponse"
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.GetRecipeDetailsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/recipes/ownedby/{userId}":
+  '/Recipes/ownedby/{userId}':
     get:
       tags:
-      - Recipes
+        - Recipes
       summary: Get Recipes Owned By User
       description: Retrieves the recipes that are owned by the user.
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse"
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/recipes/ownedby":
+  /Recipes/ownedby:
     get:
       tags:
-      - Recipes
+        - Recipes
       summary: Get Recipes Owned By User
       description: Retrieves the recipes that are owned by the user.
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse"
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/recipes/visibleto/{userId}":
+  '/Recipes/visibleto/{userId}':
     get:
       tags:
-      - Recipes
+        - Recipes
       summary: Get Recipes Visible To User
       description: Retrieves the recipes that are visible to the user.
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse"
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/recipes/visibleto":
+  /Recipes/visibleto:
     get:
       tags:
-      - Recipes
+        - Recipes
       summary: Get Recipes Visible To User
       description: Retrieves the recipes that are visible to the user.
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse"
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/examine/recipe":
+  /Recipes/filter:
+    get:
+      tags:
+        - Recipes
+      summary: Filter Recipes
+      description: Runs a filter for recipes and retrieves the matching recipe IDs.
+      parameters:
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: ownerUserId
+          in: query
+          description: Optional. The ID of the user that owns the items.
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: When the request has completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.FilterRecipeIdsResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+  /Recipes/list/enhanced:
+    get:
+      tags:
+        - Recipes
+      summary: Enhanced Recipe List
+      description: "Runs a filter for recipes and retrieves the matching records for \r\nenhanced recipe information usable for list purposes."
+      parameters:
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: ownerUserId
+          in: query
+          description: Optional. The ID of the user that owns the items.
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: When the request has completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Recipes.Web.Models.GetRecipesResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+  /examine/recipe:
     post:
       tags:
-      - Scraping
+        - Scraping
       summary: Scrape URL
       description: Scrapes the URL for recipe information.
       requestBody:
@@ -1589,7 +2228,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Scraping.Web.Models.ScrapeUrlRequest"
+              $ref: '#/components/schemas/Calorate.Scraping.Web.Models.ScrapeUrlRequest'
         required: true
       responses:
         '200':
@@ -1597,7 +2236,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Scraping.Web.Models.ScrapeUrlResponse"
+                $ref: '#/components/schemas/Calorate.Scraping.Web.Models.ScrapeUrlResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -1606,203 +2245,191 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/tags/get/{id}":
+  '/tags/get/{id}':
     get:
       tags:
-      - Tags
+        - Tags
       summary: Get Tag
       description: Retrieves the tag for the provided ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the tag to retrieve details for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the tag to retrieve details for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse"
+                $ref: '#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/tags/ownedby/{userId}":
+  '/tags/ownedby/{userId}':
     get:
       tags:
-      - Tags
+        - Tags
       summary: Get Tags Owned By User
       description: Retrieves the tags that are owned by the user.
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse"
+                $ref: '#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/tags/ownedby":
+  /tags/ownedby:
     get:
       tags:
-      - Tags
+        - Tags
       summary: Get Tags Owned By User
       description: Retrieves the tags that are owned by the user.
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get owned items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get owned items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse"
+                $ref: '#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/tags/visibleto/{userId}":
+  '/tags/visibleto/{userId}':
     get:
       tags:
-      - Tags
+        - Tags
       summary: Get Tags Visible To User
       description: Retrieves the tags that are visible to the user.
       parameters:
-      - name: userId
-        in: path
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: path
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse"
+                $ref: '#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/tags/visibleto":
+  /tags/visibleto:
     get:
       tags:
-      - Tags
+        - Tags
       summary: Get Tags Visible To User
       description: Retrieves the tags that are visible to the user.
       parameters:
-      - name: userId
-        in: query
-        description: "Optional. The ID of the user to get visible items. If not supplied,
-          \r\nthe user ID will be the requester."
-        schema:
-          type: integer
-          format: int64
-      - name: offset
-        in: query
-        description: "Optional. The offset into the results. If not supplied, the
-          default\r\nis 0."
-        schema:
-          type: integer
-          format: int32
-      - name: pageSize
-        in: query
-        description: "Optional. The size of the result set. If not supplied, the default
-          \r\nis 100. The maximum value is 100."
-        schema:
-          type: integer
-          format: int32
+        - name: userId
+          in: query
+          description: "Optional. The ID of the user to get visible items. If not supplied, \r\nthe user ID will be the requester."
+          schema:
+            type: integer
+            format: int64
+        - name: offset
+          in: query
+          description: "Optional. The offset into the results. If not supplied, the default\r\nis 0."
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: "Optional. The size of the result set. If not supplied, the default \r\nis 100. The maximum value is 100."
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse"
+                $ref: '#/components/schemas/Calorate.Tagging.Web.Models.GetTagsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/tags/categories/list":
+  /tags/categories/list:
     get:
       tags:
-      - Tags
+        - Tags
       summary: Get Tag Categories
       description: Retrieves the tag categories.
       responses:
@@ -1811,17 +2438,17 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.GetTagCategoriesResponse"
+                $ref: '#/components/schemas/Calorate.Tagging.Web.Models.GetTagCategoriesResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '403':
           description: When the request is not authorized.
-  "/units/get/standard/list":
+  /units/get/standard/list:
     get:
       tags:
-      - Units
+        - Units
       summary: Get All Standard Units
       description: Retrieves the set of all standard units in the system.
       responses:
@@ -1830,15 +2457,15 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Units.Web.Models.GetUnitsResponse"
+                $ref: '#/components/schemas/Calorate.Units.Web.Models.GetUnitsResponse'
         '401':
           description: When the request is not authenticated.
         '404':
           description: When the unit is not found.
-  "/units/get/base/mass":
+  /units/get/base/mass:
     get:
       tags:
-      - Units
+        - Units
       summary: Get Mass Base Unit
       description: Retrieves the unit used as the base unit for mass.
       responses:
@@ -1847,13 +2474,13 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+                $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
         '401':
           description: When the request is not authenticated.
-  "/units/get/base/volume":
+  /units/get/base/volume:
     get:
       tags:
-      - Units
+        - Units
       summary: Get Volume Base Unit
       description: Retrieves the unit used as the base unit for volume.
       responses:
@@ -1862,70 +2489,70 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+                $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
         '401':
           description: When the request is not authenticated.
-  "/units/get/{id}":
+  '/units/get/{id}':
     get:
       tags:
-      - Units
+        - Units
       summary: Get Unit
       description: Retrieves the unit for the specified unit ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID to retrieve the unit for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID to retrieve the unit for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+                $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
         '401':
           description: When the request is not authenticated.
         '404':
           description: When the unit is not found.
-  "/units/get/base/{id}":
+  '/units/get/base/{id}':
     get:
       tags:
-      - Units
+        - Units
       summary: Get Base Unit of Unit
       description: Retrieves the base unit of the specified unit ID.
       parameters:
-      - name: id
-        in: path
-        description: The ID of the unit to retrieve the base unit for.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the unit to retrieve the base unit for.
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: When the request has completed successfully.
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+                $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
         '401':
           description: When the request is not authenticated.
         '404':
           description: When the unit is not found.
-  "/units/convert":
+  /units/convert:
     post:
       tags:
-      - Units
+        - Units
       summary: Convert Units
       description: Converts a set of units from one type to another.
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Units.Web.Models.ConvertUnitsRequest"
+              $ref: '#/components/schemas/Calorate.Units.Web.Models.ConvertUnitsRequest'
         required: true
       responses:
         '200':
@@ -1933,25 +2560,24 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Units.Web.Models.ConvertUnitsResponse"
+                $ref: '#/components/schemas/Calorate.Units.Web.Models.ConvertUnitsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '415':
           description: When the request is not the right media type.
-  "/units/beautify":
+  /units/beautify:
     post:
       tags:
-      - Units
+        - Units
       summary: Beautify Units
-      description: "Transforms programmatic representation of units data into \r\nsomething
-        that is more human-friendly and ready to be used in a \r\nuser interface."
+      description: "Transforms programmatic representation of units data into \r\nsomething that is more human-friendly and ready to be used in a \r\nuser interface."
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Units.Web.Models.BeautifyUnitsRequest"
+              $ref: '#/components/schemas/Calorate.Units.Web.Models.BeautifyUnitsRequest'
         required: true
       responses:
         '200':
@@ -1959,17 +2585,79 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Units.Web.Models.BeautifyUnitsResponse"
+                $ref: '#/components/schemas/Calorate.Units.Web.Models.BeautifyUnitsResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
           description: When the request is not authenticated.
         '415':
           description: When the request is not the right media type.
-  "/users/metadata/update":
+  /USDA/import:
+    get:
+      tags:
+        - USDA
+      summary: Import USDA Food Data
+      description: Starts importing the USDA food data.
+      parameters:
+        - name: usdaZipResource
+          in: query
+          description: The path to the USDA zip resource.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: When the request is successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Usda.Web.Models.StartJobResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /USDA/migrate:
+    get:
+      tags:
+        - USDA
+      summary: Migrate USDA Food Data
+      description: Starts migrating the imported USDA food data to Calorate format.
+      parameters:
+        - name: ignoreLastMigratedAndStartFromEarliestFcdId
+          in: query
+          description: "Optional. If set, this will ignore previous migration attempts and \r\nstart migrating data from the earliest imported FCD ID; Otherwise,\r\nthis will continue from the last migrated FCD ID."
+          schema:
+            type: boolean
+            default: false
+        - name: maxRecordsToMigrate
+          in: query
+          description: Optional. The maximum number of records to migrate.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: When the request is successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calorate.Usda.Web.Models.StartJobResponse'
+        '400':
+          description: When the parameters for the request are invalid.
+        '401':
+          description: When the request is not authenticated.
+        '403':
+          description: When the request is not authorized.
+        '415':
+          description: When the request is not the right media type.
+  /users/metadata/update:
     post:
       tags:
-      - Users
+        - Users
       summary: Update Metadata
       description: Updates the metadata for the user.
       requestBody:
@@ -1977,7 +2665,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Users.Web.Models.UpdateUserMetadataRequest"
+              $ref: '#/components/schemas/Calorate.Users.Web.Models.UpdateUserMetadataRequest'
         required: true
       responses:
         '200':
@@ -1990,10 +2678,10 @@ paths:
           description: When the request is not authorized.
         '415':
           description: When the request is not the right media type.
-  "/users/metadata/filter":
+  /users/metadata/filter:
     post:
       tags:
-      - Users
+        - Users
       summary: Filter Metadata
       description: Filters the metadata for the user.
       requestBody:
@@ -2001,7 +2689,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Calorate.Users.Web.Models.FilterUserMetadataRequest"
+              $ref: '#/components/schemas/Calorate.Users.Web.Models.FilterUserMetadataRequest'
         required: true
       responses:
         '200':
@@ -2009,7 +2697,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Calorate.Users.Web.Models.FilterUserMetadataResponse"
+                $ref: '#/components/schemas/Calorate.Users.Web.Models.FilterUserMetadataResponse'
         '400':
           description: When the parameters for the request are invalid.
         '401':
@@ -2020,6 +2708,28 @@ paths:
           description: When the request is not the right media type.
 components:
   schemas:
+    Calorate.Administration.Web.Models.CreateApiAccountRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+        autoApprove:
+          type: boolean
+      additionalProperties: false
+    Calorate.Administration.Web.Models.CreateApiAccountResponse:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false
     Calorate.Authentication.Web.Models.ChangePasswordRequest:
       type: object
       properties:
@@ -2053,22 +2763,13 @@ components:
           type: string
           nullable: true
       additionalProperties: false
-    Calorate.Authentication.Web.Models.LoginChallenge:
-      type: object
-      properties:
-        challenge:
-          type: string
-          nullable: true
-        parameters:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-      additionalProperties: false
     Calorate.Authentication.Web.Models.LoginRequest:
       type: object
       properties:
         email:
+          type: string
+          nullable: true
+        userId:
           type: string
           nullable: true
         password:
@@ -2101,8 +2802,6 @@ components:
           type: string
           format: date-time
           nullable: true
-        loginChallenge:
-          "$ref": "#/components/schemas/Calorate.Authentication.Web.Models.LoginChallenge"
       additionalProperties: false
     Calorate.Authentication.Web.Models.RefreshRequest:
       type: object
@@ -2152,16 +2851,24 @@ components:
         ownerUserId:
           type: string
           nullable: true
-        name:
+        technicalName:
+          type: string
+          nullable: true
+        friendlyName:
           type: string
           nullable: true
       additionalProperties: false
     Calorate.Brands.Web.Models.CreateBrandRequest:
       type: object
       properties:
-        name:
+        technicalName:
           type: string
           nullable: true
+        friendlyName:
+          type: string
+          nullable: true
+        visibleToChildren:
+          type: boolean
       additionalProperties: false
     Calorate.Brands.Web.Models.GetBrandsResponse:
       type: object
@@ -2169,18 +2876,18 @@ components:
         brands:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Brands.Web.Models.Brand"
+            $ref: '#/components/schemas/Calorate.Brands.Web.Models.Brand'
           nullable: true
       additionalProperties: false
     Calorate.Calculations.Web.Models.GetBmrRequest:
       type: object
       properties:
         mass:
-          "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity"
+          $ref: '#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity'
         leanBodyMass:
-          "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity"
+          $ref: '#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity'
         height:
-          "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity"
+          $ref: '#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity'
         ageYears:
           type: integer
           format: int32
@@ -2207,11 +2914,11 @@ components:
           format: double
           nullable: true
         mass:
-          "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity"
+          $ref: '#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity'
         leanBodyMass:
-          "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity"
+          $ref: '#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity'
         height:
-          "$ref": "#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity"
+          $ref: '#/components/schemas/Calorate.Calculations.Web.Models.UnparsedQuantity'
         ageYears:
           type: integer
           format: int32
@@ -2255,7 +2962,7 @@ components:
         segments:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.CheckinSegment"
+            $ref: '#/components/schemas/Calorate.Checkins.Web.Models.CheckinSegment'
           nullable: true
       additionalProperties: false
     Calorate.Checkins.Web.Models.CheckinGoal:
@@ -2278,12 +2985,12 @@ components:
           nullable: true
         metrics:
           type: object
-          additionalProperties: {}
+          additionalProperties: { }
           nullable: true
         goals:
           type: object
           additionalProperties:
-            "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.CheckinGoal"
+            $ref: '#/components/schemas/Calorate.Checkins.Web.Models.CheckinGoal'
           nullable: true
       additionalProperties: false
     Calorate.Checkins.Web.Models.CreateCheckinRequest:
@@ -2292,20 +2999,20 @@ components:
         segments:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.CheckinSegment"
+            $ref: '#/components/schemas/Calorate.Checkins.Web.Models.CheckinSegment'
           nullable: true
       additionalProperties: false
     Calorate.Checkins.Web.Models.CreateCheckinResponse:
       type: object
       properties:
         checkin:
-          "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.Checkin"
+          $ref: '#/components/schemas/Calorate.Checkins.Web.Models.Checkin'
       additionalProperties: false
     Calorate.Checkins.Web.Models.GetCheckinResponse:
       type: object
       properties:
         checkin:
-          "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.Checkin"
+          $ref: '#/components/schemas/Calorate.Checkins.Web.Models.Checkin'
       additionalProperties: false
     Calorate.Checkins.Web.Models.GetCheckinsResponse:
       type: object
@@ -2313,7 +3020,7 @@ components:
         checkins:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Checkins.Web.Models.Checkin"
+            $ref: '#/components/schemas/Calorate.Checkins.Web.Models.Checkin'
           nullable: true
       additionalProperties: false
     Calorate.Fitbit.Web.Models.GetAuthorizationUrlResponse:
@@ -2357,7 +3064,7 @@ components:
           type: string
           nullable: true
         unit:
-          "$ref": "#/components/schemas/Calorate.Food.Web.Models.FoodUnit"
+          $ref: '#/components/schemas/Calorate.Food.Web.Models.FoodUnit'
         amount:
           type: number
           format: double
@@ -2374,7 +3081,7 @@ components:
         conversions:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Food.Web.Models.BeautifyConversion"
+            $ref: '#/components/schemas/Calorate.Food.Web.Models.BeautifyConversion'
           nullable: true
       additionalProperties: false
     Calorate.Food.Web.Models.BeautifyUnitsResponse:
@@ -2383,7 +3090,7 @@ components:
         results:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Food.Web.Models.BeautifyConversionResult"
+            $ref: '#/components/schemas/Calorate.Food.Web.Models.BeautifyConversionResult'
           nullable: true
       additionalProperties: false
     Calorate.Food.Web.Models.CreateFoodRequest:
@@ -2402,8 +3109,11 @@ components:
           type: boolean
           nullable: true
         servingSize:
-          "$ref": "#/components/schemas/Calorate.Food.Web.Models.Quantity"
+          $ref: '#/components/schemas/Calorate.Food.Web.Models.Quantity'
         brandId:
+          type: string
+          nullable: true
+        upc:
           type: string
           nullable: true
         base64NutritionImage:
@@ -2415,7 +3125,7 @@ components:
         nutrition:
           type: object
           additionalProperties:
-            "$ref": "#/components/schemas/Calorate.Food.Web.Models.Quantity"
+            $ref: '#/components/schemas/Calorate.Food.Web.Models.Quantity'
           nullable: true
         allowReviewForSharedAccess:
           type: boolean
@@ -2454,14 +3164,14 @@ components:
           type: string
           format: date-time
         servingSize:
-          "$ref": "#/components/schemas/Calorate.Food.Web.Models.Quantity"
+          $ref: '#/components/schemas/Calorate.Food.Web.Models.Quantity'
         nutrients:
           type: object
           additionalProperties:
             type: object
             additionalProperties:
               type: number
-              format: double
+              format: float
           nullable: true
       additionalProperties: false
     Calorate.Food.Web.Models.FoodListItem:
@@ -2500,7 +3210,7 @@ components:
       type: object
       properties:
         food:
-          "$ref": "#/components/schemas/Calorate.Food.Web.Models.FoodDetailsItem"
+          $ref: '#/components/schemas/Calorate.Food.Web.Models.FoodDetailsItem'
       additionalProperties: false
     Calorate.Food.Web.Models.GetFoodUnitsResponse:
       type: object
@@ -2508,7 +3218,7 @@ components:
         foodUnits:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Food.Web.Models.FoodUnit"
+            $ref: '#/components/schemas/Calorate.Food.Web.Models.FoodUnit'
           nullable: true
       additionalProperties: false
     Calorate.Food.Web.Models.GetFoodsResponse:
@@ -2520,7 +3230,7 @@ components:
         food:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Food.Web.Models.FoodListItem"
+            $ref: '#/components/schemas/Calorate.Food.Web.Models.FoodListItem'
           nullable: true
         count:
           type: integer
@@ -2548,7 +3258,7 @@ components:
         results:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Food.Web.Models.FoodListItem"
+            $ref: '#/components/schemas/Calorate.Food.Web.Models.FoodListItem'
           nullable: true
         offset:
           type: integer
@@ -2575,7 +3285,7 @@ components:
       type: object
       properties:
         mealplanRules:
-          "$ref": "#/components/schemas/Calorate.Generation.Web.Models.MealplanRules"
+          $ref: '#/components/schemas/Calorate.Generation.Web.Models.MealplanRules'
         mealplanName:
           type: string
           nullable: true
@@ -2603,7 +3313,7 @@ components:
         mealRules:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Generation.Web.Models.MealplanMealRules"
+            $ref: '#/components/schemas/Calorate.Generation.Web.Models.MealplanMealRules'
           nullable: true
       additionalProperties: false
     Calorate.Generation.Web.Models.MealplanMealRules:
@@ -2630,7 +3340,7 @@ components:
         dayRules:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Generation.Web.Models.MealplanDayRules"
+            $ref: '#/components/schemas/Calorate.Generation.Web.Models.MealplanDayRules'
           nullable: true
       additionalProperties: false
     Calorate.Jobs.Web.Models.GetJobResponse:
@@ -2687,13 +3397,39 @@ components:
         positiveReview:
           type: boolean
       additionalProperties: false
+    Calorate.Media.Web.Models.CreateUploadUrlRequest:
+      type: object
+      properties:
+        notes:
+          type: string
+          nullable: true
+        tagIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+          nullable: true
+      additionalProperties: false
+    Calorate.Media.Web.Models.CreateUploadUrlResponse:
+      type: object
+      properties:
+        mediaId:
+          type: string
+          nullable: true
+        uploadUrl:
+          type: string
+          nullable: true
+        expirationDateTimeUtc:
+          type: string
+          format: date-time
+      additionalProperties: false
     Calorate.Nutrients.Web.Models.GetNutrientsResponse:
       type: object
       properties:
         nutrients:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Nutrients.Web.Models.Nutrient"
+            $ref: '#/components/schemas/Calorate.Nutrients.Web.Models.Nutrient'
           nullable: true
       additionalProperties: false
     Calorate.Nutrients.Web.Models.Nutrient:
@@ -2703,9 +3439,6 @@ components:
           type: string
           nullable: true
         name:
-          type: string
-          nullable: true
-        symbol:
           type: string
           nullable: true
         unitId:
@@ -2730,18 +3463,14 @@ components:
         servingSize:
           type: integer
           format: int32
-          nullable: true
         prepTimeMinutes:
           type: integer
           format: int32
-          nullable: true
         cookTimeMinutes:
           type: integer
           format: int32
-          nullable: true
         allowReviewForSharedAccess:
           type: boolean
-          nullable: true
         steps:
           type: array
           items:
@@ -2750,7 +3479,7 @@ components:
         ingredients:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.IngredientRange"
+            $ref: '#/components/schemas/Calorate.Recipes.Web.Models.IngredientRange'
           nullable: true
         tagIds:
           type: array
@@ -2765,11 +3494,20 @@ components:
           type: string
           nullable: true
       additionalProperties: false
+    Calorate.Recipes.Web.Models.FilterRecipeIdsResponse:
+      type: object
+      properties:
+        recipeIds:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
     Calorate.Recipes.Web.Models.GetRecipeDetailsResponse:
       type: object
       properties:
         recipeDetails:
-          "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.RecipeDetails"
+          $ref: '#/components/schemas/Calorate.Recipes.Web.Models.RecipeDetails'
       additionalProperties: false
     Calorate.Recipes.Web.Models.GetRecipesResponse:
       type: object
@@ -2777,7 +3515,7 @@ components:
         recipes:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.Recipe"
+            $ref: '#/components/schemas/Calorate.Recipes.Web.Models.Recipe'
           nullable: true
       additionalProperties: false
     Calorate.Recipes.Web.Models.Ingredient:
@@ -2796,7 +3534,7 @@ components:
           type: string
           nullable: true
         quantity:
-          "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.Quantity"
+          $ref: '#/components/schemas/Calorate.Recipes.Web.Models.Quantity'
       additionalProperties: false
     Calorate.Recipes.Web.Models.IngredientRange:
       type: object
@@ -2860,14 +3598,14 @@ components:
         ingredientsPerServing:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.Ingredient"
+            $ref: '#/components/schemas/Calorate.Recipes.Web.Models.Ingredient'
           nullable: true
       additionalProperties: false
     Calorate.Recipes.Web.Models.PreviewRecipeRequest:
       type: object
       properties:
         parameters:
-          "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.CreateRecipeRequest"
+          $ref: '#/components/schemas/Calorate.Recipes.Web.Models.CreateRecipeRequest'
         servingsToSimulate:
           type: integer
           format: int32
@@ -2876,7 +3614,7 @@ components:
       type: object
       properties:
         meal:
-          "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.Meal"
+          $ref: '#/components/schemas/Calorate.Recipes.Web.Models.Meal'
       additionalProperties: false
     Calorate.Recipes.Web.Models.Quantity:
       type: object
@@ -2966,10 +3704,15 @@ components:
           items:
             type: string
           nullable: true
+        userTagIds:
+          type: array
+          items:
+            type: string
+          nullable: true
         ingredients:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Recipes.Web.Models.IngredientRange"
+            $ref: '#/components/schemas/Calorate.Recipes.Web.Models.IngredientRange'
           nullable: true
       additionalProperties: false
     Calorate.Scraping.Web.Models.ScrapeUrlRequest:
@@ -2983,7 +3726,7 @@ components:
       type: object
       properties:
         recipe:
-          "$ref": "#/components/schemas/Calorate.Scraping.Web.Models.ScrapedRecipe"
+          $ref: '#/components/schemas/Calorate.Scraping.Web.Models.ScrapedRecipe'
       additionalProperties: false
     Calorate.Scraping.Web.Models.ScrapedIngredient:
       type: object
@@ -3038,7 +3781,7 @@ components:
         ingredients:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Scraping.Web.Models.ScrapedIngredient"
+            $ref: '#/components/schemas/Calorate.Scraping.Web.Models.ScrapedIngredient'
           nullable: true
         prepTime:
           type: string
@@ -3060,7 +3803,7 @@ components:
         tagCategories:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.TagCategory"
+            $ref: '#/components/schemas/Calorate.Tagging.Web.Models.TagCategory'
           nullable: true
       additionalProperties: false
     Calorate.Tagging.Web.Models.GetTagsResponse:
@@ -3069,7 +3812,7 @@ components:
         tags:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Tagging.Web.Models.Tag"
+            $ref: '#/components/schemas/Calorate.Tagging.Web.Models.Tag'
           nullable: true
       additionalProperties: false
     Calorate.Tagging.Web.Models.Tag:
@@ -3123,7 +3866,7 @@ components:
           type: string
           nullable: true
         unit:
-          "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+          $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
         amount:
           type: number
           format: double
@@ -3140,7 +3883,7 @@ components:
         conversions:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Units.Web.Models.BeautifyConversion"
+            $ref: '#/components/schemas/Calorate.Units.Web.Models.BeautifyConversion'
           nullable: true
       additionalProperties: false
     Calorate.Units.Web.Models.BeautifyUnitsResponse:
@@ -3149,7 +3892,7 @@ components:
         results:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Units.Web.Models.BeautifyConversionResult"
+            $ref: '#/components/schemas/Calorate.Units.Web.Models.BeautifyConversionResult'
           nullable: true
       additionalProperties: false
     Calorate.Units.Web.Models.Conversion:
@@ -3169,9 +3912,9 @@ components:
       type: object
       properties:
         sourceUnit:
-          "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+          $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
         destinationUnit:
-          "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+          $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
         amount:
           type: number
           format: double
@@ -3185,7 +3928,7 @@ components:
         conversions:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Units.Web.Models.Conversion"
+            $ref: '#/components/schemas/Calorate.Units.Web.Models.Conversion'
           nullable: true
       additionalProperties: false
     Calorate.Units.Web.Models.ConvertUnitsResponse:
@@ -3194,7 +3937,7 @@ components:
         results:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Units.Web.Models.ConversionResult"
+            $ref: '#/components/schemas/Calorate.Units.Web.Models.ConversionResult'
           nullable: true
       additionalProperties: false
     Calorate.Units.Web.Models.GetUnitsResponse:
@@ -3203,7 +3946,7 @@ components:
         units:
           type: array
           items:
-            "$ref": "#/components/schemas/Calorate.Units.Web.Models.Unit"
+            $ref: '#/components/schemas/Calorate.Units.Web.Models.Unit'
           nullable: true
       additionalProperties: false
     Calorate.Units.Web.Models.Unit:
@@ -3222,6 +3965,13 @@ components:
           type: number
           format: double
         exclusiveId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Calorate.Usda.Web.Models.StartJobResponse:
+      type: object
+      properties:
+        jobId:
           type: string
           nullable: true
       additionalProperties: false
