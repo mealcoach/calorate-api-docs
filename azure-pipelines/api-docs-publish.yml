@@ -36,6 +36,9 @@ jobs:
         script: |
           # Write your PowerShell commands here.
 
+          # makes the magic happen... this is not a production feature
+          $env:ASPNETCORE_ENVIRONMENT = "Development"
+
           # remap environment variables
           $env:aws__rds__database_name = "$(AWS_RDS_DATABASE_NAME)"
           $env:aws__rds__username = "$(AWS_RDS_READONLY_USERNAME)"
